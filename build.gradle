@@ -17,9 +17,14 @@
 import java.text.SimpleDateFormat
 
 Date buildTimeAndDate = new Date()
+
+
 ext {
     buildTime = new SimpleDateFormat('yyyy-MM-dd').format(buildTimeAndDate)
     buildDate = new SimpleDateFormat('HH:mm:ss.SSSZ').format(buildTimeAndDate)
+    cmd = "git rev-parse --short HEAD"
+    process = cmd.execute()
+    revision = process.text.trim()
 }
 
 buildscript {

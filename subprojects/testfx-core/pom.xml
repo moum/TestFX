@@ -18,6 +18,8 @@
     </licenses>
 
     <scm>
+        <connection>scm:git:https://github.com/TestFX/TestFX.git</connection>
+        <developerConnection>scm:git:https://github.com/TestFX/TestFX.git</developerConnection>
         <url>https://github.com/SmartBear/TestFX.git</url>
     </scm>
 
@@ -26,6 +28,25 @@
             <id>release</id>
             <build>
                 <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>buildnumber-maven-plugin</artifactId>
+                        <version>1.3</version>
+                        <executions>
+                            <execution>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>create</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <doCheck>true</doCheck>
+                            <doUpdate>true</doUpdate>
+                            <shortRevisionLength>7</shortRevisionLength>
+                            <revisionOnScmFailure/>
+                        </configuration>
+                    </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-source-plugin</artifactId>
@@ -67,6 +88,18 @@
                         </executions>
                         <configuration>
                             <ascDirectory>${project.build.directory}</ascDirectory>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-jar-plugin</artifactId>
+                        <version>2.5</version>
+                        <configuration>
+                            <archive>
+                                <manifestEntries>
+                                    <git-revision>${buildNumber}</git-revision>
+                                </manifestEntries>
+                            </archive>
                         </configuration>
                     </plugin>
 

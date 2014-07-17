@@ -97,7 +97,8 @@ jar {
             'Specification-Vendor': 'SmartBear Software',
             'Implementation-Title': project.name,
             'Implementation-Version': project.version,
-            'Implementation-Vendor': 'SmartBear Software'
+            'Implementation-Vendor': 'SmartBear Software',
+            'git-revision': project.revision
         )
     }
 }
